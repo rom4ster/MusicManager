@@ -1,0 +1,4 @@
+CREATE TABLE Song (
+name TEXT NOT NULL,
+
+);

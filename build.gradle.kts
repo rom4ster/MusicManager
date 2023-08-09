@@ -5,4 +5,13 @@ plugins {
     id("com.android.application").apply(false)
     id("com.android.library").apply(false)
     id("org.jetbrains.compose").apply(false)
+    kotlin("plugin.serialization") version "1.9.0"
+}
+
+buildscript {
+
+    dependencies {
+        // ...
+        //classpath("app.cash.sqldelight:gradle-plugin:2.0.0")
+    }
 }
