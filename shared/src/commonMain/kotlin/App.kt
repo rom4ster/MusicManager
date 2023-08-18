@@ -12,6 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.rom4ster.musicmanager.audio.AudioPlayer
+import com.rom4ster.musicmanager.util.FileUtils
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -27,6 +30,19 @@ fun App() {
                 showImage = !showImage
             }) {
                 Text(greetingText)
+            }
+            Button(
+                onClick = {
+                    runBlocking {
+                        AudioPlayer().apply {
+                            load("${FileUtils.getFileDirectory()}/test.mp3")
+                            play()
+                        }
+                    }
+
+                }
+            ) {
+                Text(FileUtils.getFileDirectory())
             }
             AnimatedVisibility(showImage) {
                 Image(

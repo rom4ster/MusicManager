@@ -1,10 +1,11 @@
-
+val sqlDelightVersion = "1.5.5"
+val korauVersion = "4.0.9"
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
-    id("app.cash.sqldelight") version "2.0.0"
+    id("com.squareup.sqldelight")
     kotlin("plugin.serialization") version "1.9.0"
 
 
@@ -14,13 +15,12 @@ plugins {
 
 
 sqldelight {
-    databases {
-        create("MusicDb") {
-            packageName.set("com.rom4ster.musicmanager.kmm.database")
-            dialect("app.cash.sqldelight:mysql-dialect:2.0.0")
+
+        database("MusicDb") {
+            packageName="com.rom4ster.musicmanager.kmm.database"
         }
 
-    }
+
 }
 kotlin {
     androidTarget()
@@ -52,7 +52,7 @@ kotlin {
                 implementation(compose.material)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation("app.cash.sqldelight:sqlite-driver:2.0.0")
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             }
         }
@@ -61,7 +61,9 @@ kotlin {
                 api("androidx.activity:activity-compose:1.6.1")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.9.0")
-                implementation("app.cash.sqldelight:android-driver:2.0.0")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+                implementation("androidx.startup:startup-runtime:1.1.1")
+
             }
         }
         val iosX64Main by getting
@@ -76,6 +78,8 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
+                implementation("com.squareup.sqldelight:sqlite-driver:$sqlDelightVersion")
+                implementation("com.soywiz.korlibs.korau:korau-jvm:$korauVersion")
             }
         }
     }
@@ -96,6 +100,8 @@ android {
     kotlin {
         jvmToolchain(11)
     }
+
+
 }
 
 

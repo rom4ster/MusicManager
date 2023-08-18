@@ -19,8 +19,6 @@ android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
     namespace = "com.myapplication"
 
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-
     defaultConfig {
         applicationId = "com.myapplication.MyApplication"
         minSdk = (findProperty("android.minSdk") as String).toInt()
