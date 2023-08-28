@@ -2,7 +2,8 @@ CREATE TABLE Song (
 name TEXT NOT NULL,
 path TEXT,
 uploader TEXT,
-ordinal INTEGER
+ordinal INTEGER,
+status TEXT CHECK(status IN ('DEFAULT', 'DELETED', 'WHITELISTED')) NOT NULL
 );
 
 CREATE TABLE SongMetaData (
@@ -17,7 +18,7 @@ album_name TEXT,
 release_date TEXT
 );
 
-insertSong: INSERT INTO Song(name, path, uploader, ordinal) VALUES (?,?,?,?);
+insertSong: INSERT INTO Song(name, path, uploader, ordinal, status) VALUES (?,?,?,?, ?);
 insertSongMetaData: INSERT INTO SongMetaData(name,genres) VALUES (?,?);
 insertAlbumInfo: INSERT INTO AlbumInfo(name,artist,album_name,release_date) VALUES (?,?,?,?);
 

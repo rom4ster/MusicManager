@@ -3,14 +3,21 @@ package com.rom4ster.musicmanager.kmm.shared.entity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
+enum class STATUS(val status: String){
+    DELETED("deleted"),
+    WHITELISTED("whitelisted"),
+    DEFAULT("default"),
+}
 @Serializable
 data class Song(
     val name: String,
     val path: String?,
     val uploader: String? = null,
-    val ordinal: Int,
+    val ordinal: Long,
+    val status: STATUS
 ) {
-    constructor(name: String, ordinal: Int) : this(name, null, null, ordinal)
+    constructor(name: String, ordinal: Long, status: STATUS) : this(name, null, null, ordinal, status)
 }
 
 @Serializable

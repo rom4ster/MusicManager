@@ -1,0 +1,3 @@
+package com.rom4ster.musicmanager.viewmodels
+
+interface BindableViewModel
